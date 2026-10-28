@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import useFetchPhotos from "../hooks/useFetchPhotos";
 import { buildFuzzyRegex } from "../utils/fuzzy";
 import PhotoCard from "./PhotoCard";
@@ -18,6 +18,8 @@ export default function PhotoGallery() {
     return photos.filter((photo) => regex.test(photo.author));
   }, [photos, regex]);
 
+  const onSearch = useCallback((query: string) => setQuery(query), [])
+
   if (loading) return <LoadingState />;
   if (error) return <ErrorState error={error} />;
 
@@ -25,7 +27,7 @@ export default function PhotoGallery() {
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4">
         <div className="w-full max-w-xs">
-          <SearchBar value={query} onChange={setQuery} />
+          <SearchBar value={query} onChange={onSearch} />
         </div>
         {!loading && (
           <p className="shrink-0 text-xs text-[var(--muted-foreground)]">
