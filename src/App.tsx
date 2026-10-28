@@ -1,122 +1,48 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import PhotoGallery from "./components/PhotoGallery";
+import GlobalStore from "./state/GlobalStore";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <GlobalStore>
+      <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+        {/* Sticky frosted-glass header */}
+        <header
+          className="sticky top-0 z-10 border-b border-[var(--border)]"
+          style={{
+            background: "rgba(249,250,251,0.85)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
         >
-          Count is {count}
-        </button>
-      </section>
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+            <div>
+              <h1 className="text-sm font-semibold tracking-tight text-[var(--foreground)]">
+                Photo Gallery
+              </h1>
+              <p className="text-xs text-[var(--muted-foreground)]">
+                A curated collection of photography
+              </p>
+            </div>
+            <span
+              className="rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1 text-[10px] font-medium uppercase tracking-widest text-[var(--muted-foreground)]"
+            >
+              Picsum
+            </span>
+          </div>
+        </header>
 
-      <div className="ticks"></div>
+        <main className="mx-auto max-w-7xl px-6 py-10">
+          <PhotoGallery />
+        </main>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <footer className="border-t border-[var(--border)]">
+          <div className="mx-auto max-w-7xl px-6 py-5 text-xs text-[var(--muted-foreground)]">
+            © {new Date().getFullYear()} Photo Gallery · Built with React
+          </div>
+        </footer>
+      </div>
+    </GlobalStore>
+  );
 }
 
-export default App
+export default App;
